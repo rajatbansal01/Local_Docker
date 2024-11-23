@@ -1,0 +1,11 @@
+services:
+  app: # this is the name of the service, you can give any name you want
+    build: 
+      context: . # this is the path to the Dockerfile, if the Dockerfile is in the root of the project directory, you can use `.` to specify the current directory
+      dockerfile: Dockerfile # this is the name of the Dockerfile, if you have named your Dockerfile something else, you can specify it here
+    volumes:
+      - ./project:/app # this is most important part, this is the volume mapping, this will map the current directory to the /app directory in the container and the changes you will do inside container will be reflected in the host machine and vice versa
+    ports:
+      - "8000:8000" # this is the port mapping, you can map any port you want
+
+    entrypoint: tail -f /dev/null # this is the entrypoint, this is the command that will be executed when the container starts, this is a dummy command that will keep the container running and we can develop inside the container
